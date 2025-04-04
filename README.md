@@ -15,23 +15,13 @@ npm run dev
 
 ## Code Gen
 
-### To make the CLI Exacutable
-In the terminal
-```bash
-chmod +x cli.js
-```
+### Run the CLI
 
 Now run it with
 ```bash
-node cli.js create-feature orders
+npm run feature [feature_name]
 ```
-
-### Create a REST feature
+e.g.
 ```bash
-node cli/cli.js create-feature orders
-```
-
-### Create a graphQL feature (why would you want to?!)
-```bash
-node cli/cli.js create-feature inventory --graphql
+npm run feature orders
 ```
