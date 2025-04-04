@@ -1,0 +1,34 @@
+### Create
+POST http://localhost:3000/api/products/
+Content-Type: application/json
+
+{
+  "name": "Test products",
+  "description": "This is a test item"
+}
+
+###
+
+### Get All
+GET http://localhost:3000/api/products/
+
+###
+
+### Get by ID
+GET http://localhost:3000/api/products/1
+
+###
+
+### Update
+PUT http://localhost:3000/api/products/1
+Content-Type: application/json
+
+{
+  "name": "Updated products",
+  "description": "Updated description"
+}
+
+###
+
+### Delete
+DELETE http://localhost:3000/api/products/1
