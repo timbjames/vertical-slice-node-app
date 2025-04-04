@@ -1,0 +1,6 @@
+{
+  "featuresDir": "src/features",
+  "routesFile": "src/routes.ts",
+  "useTests": true,
+  "defaultStyle": "rest"
+}
