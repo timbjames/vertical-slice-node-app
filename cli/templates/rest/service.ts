@@ -1,5 +1,6 @@
 import { __CLASS__Input } from './__NAME__.schema';
 
+// eslint-disable-next-line
 const db: Record<string, any> = {}; // fake in-memory db
 let idCounter = 1;
 

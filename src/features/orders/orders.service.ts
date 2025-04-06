@@ -1,5 +1,6 @@
 import { OrdersInput } from './orders.schema';
 
+// eslint-disable-next-line
 const db: Record<string, any> = {}; // fake in-memory db
 let idCounter = 1;
 
