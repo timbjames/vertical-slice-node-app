@@ -1,9 +1,14 @@
-#!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
-const chalk = require('chalk');
+import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
+import { fileURLToPath } from 'url';
 
-const config = require('./cli.config.json');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const configPath = path.join(__dirname, 'cli.config.json');
+const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+
 const args = process.argv.slice(2);
 const command = args[0];
 const featureName = args[1];
@@ -24,19 +29,21 @@ if (fs.existsSync(baseFeaturePath)) {
 fs.mkdirSync(baseFeaturePath, { recursive: true });
 
 const templatesPath = path.join(__dirname, 'templates', featureStyle);
-const files = fs.readdirSync(templatesPath);
+if (fs.existsSync(templatesPath)) {
+  const files = fs.readdirSync(templatesPath);
 
-files.forEach(file => {
-  if (!useTests && file === 'test.ts') return;
+  files.forEach(file => {
+    if (!useTests && file === 'test.ts') return;
 
-  const content = fs.readFileSync(path.join(templatesPath, file), 'utf8')
-    .replace(/__NAME__/g, featureName)
-    .replace(/__CLASS__/g, capitalize(featureName));
+    const content = fs.readFileSync(path.join(templatesPath, file), 'utf8')
+      .replace(/__NAME__/g, featureName)
+      .replace(/__CLASS__/g, capitalize(featureName));
 
-  const filename = file.replace(/\.ts$/, `.${file}`);
-  const target = path.join(baseFeaturePath, `${featureName}.${file}`);
-  fs.writeFileSync(target, content);
-});
+    const filename = file.replace(/\.ts$/, `.${file}`);
+    const target = path.join(baseFeaturePath, `${featureName}.${file}`);
+    fs.writeFileSync(target, content);
+  });
+}
 
 // Generate .http file
 const httpTemplate = path.join(__dirname, 'templates', 'rest', 'requests.http');
@@ -69,7 +76,7 @@ if (featureStyle === 'rest') {
   fs.writeFileSync(routesPath, routesContent);
 }
 
-console.log(chalk.green(`✅ CRUD feature "${featureName}" created successfully.`));
+console.log(chalk.green(`✅ Feature "${featureName}" created successfully.`));
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
