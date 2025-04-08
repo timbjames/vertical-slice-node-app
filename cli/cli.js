@@ -45,15 +45,6 @@ if (fs.existsSync(templatesPath)) {
   });
 }
 
-// Generate .http file
-const httpTemplate = path.join(__dirname, 'templates', 'rest', 'requests.http');
-if (fs.existsSync(httpTemplate)) {
-  const httpTarget = path.join(baseFeaturePath, `${featureName}.http`);
-  let httpContent = fs.readFileSync(httpTemplate, 'utf8')
-    .replace(/__NAME__/g, featureName);
-  fs.writeFileSync(httpTarget, httpContent);
-}
-
 // Modify routes.ts for REST only
 if (featureStyle === 'rest') {
   const routesPath = path.join(__dirname, '..', config.routesFile);
