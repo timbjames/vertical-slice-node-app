@@ -7,7 +7,7 @@
     "test": "jest",
     "dev": "npx nodemon --watch \"src/**/*.ts\" --exec \"npx tsx src/server.ts\"",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "npx tsx dist/server.js",
     "prisma": "prisma",
     "feature": "node cli/cli.js create-feature",
     "lint": "eslint .",
